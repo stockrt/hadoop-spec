@@ -1,19 +1,19 @@
-Name:             hadoop
-Version:          0.20.0
-Release:          1
-Summary:          Distributed filesystem and task tracker
-Group:            System Environment/Daemons
-URL:              http://hadoop.apache.org/
-Vendor:           Apache Software Foundation
-Packager:         Rogerio Carvalho Schneider <stockrt@gmail.com>
-License:          ASL 2.0
-BuildArch:        noarch
-Source0:          %{name}-%{version}.tar.gz
-BuildRoot:        %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires(pre):    shadow-utils
-Requires:         jdk
+Name:          hadoop
+Version:       0.20.0
+Release:       1
+Summary:       Distributed filesystem and task tracker
+Group:         System Environment/Daemons
+URL:           http://hadoop.apache.org/
+Vendor:        Apache Software Foundation
+Packager:      Rogerio Carvalho Schneider <stockrt@gmail.com>
+License:       ASL 2.0
+BuildArch:     noarch
+Source0:       %{name}-%{version}.tar.gz
+BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires(pre): shadow-utils
+Requires:      jdk
 
-# Preparing:
+# Getting:
 #wget http://linorg.usp.br/apache/hadoop/core/hadoop-0.20.0/hadoop-0.20.0.tar.gz
 #cp hadoop-0.20.0.tar.gz ~/rpmbuild/SOURCES/
 
@@ -24,11 +24,11 @@ Distributed filesystem (HDFS) and task tracker.
 %setup -q
 
 %build
-# Patch a few defaults into hadoop-env.sh
-# VER
-sed -i -e 's|.*HADOOP_CLASSPATH=.*|HADOOP_CLASSPATH=$HADOOP_CONF_DIR:$(build-classpath hadoop)|' \
-       -e 's|# export HADOOP_PID_DIR=.*|export HADOOP_PID_DIR=/var/run/hadoop|' \
-       -e 's|# export JAVA_HOME=.*|export JAVA_HOME=/usr/java/latest|' \
+# hadoop-env.sh defaults
+sed -i -e 's|.*JAVA_HOME=.*|export JAVA_HOME=/usr/java/latest|' \
+       -e 's|.*HADOOP_CLASSPATH=.*|export HADOOP_CLASSPATH=$HADOOP_CONF_DIR:$(build-classpath hadoop)|' \
+       -e 's|.*HADOOP_LOG_DIR=.*|export HADOOP_LOG_DIR=/var/log/hadoop|' \
+       -e 's|.*HADOOP_PID_DIR=.*|export HADOOP_PID_DIR=/var/run/hadoop|' \
        conf/hadoop-env.sh
 
 %install
@@ -47,19 +47,20 @@ install -m 0755 -d %{buildroot}%{_var}/log/hadoop
 	echo '%defattr(-,root,root,-)'
 	echo '%attr(0755,hadoop,hadoop) %{_var}/run/hadoop'
 	echo '%attr(0755,hadoop,hadoop) %{_var}/log/hadoop'
-	find %{buildroot}%{_prefix}/local/%{name} -type d -printf '%%%dir %p\n' | sed -e 's#%{buildroot}##g'
-	find %{buildroot}%{_prefix}/local/%{name} -type f -printf '%p\n' | grep -v 'conf/' | sed -e 's#%{buildroot}##g'
-	find %{buildroot}%{_prefix}/local/%{name}/conf -type f -printf '%%%config(noreplace) %p\n' | sed -e 's#%{buildroot}##g'
+	find %{buildroot}%{_prefix}/local/%{name} -type d -printf '%%%dir %p\n' | sed -e 's|%{buildroot}||g'
+	find %{buildroot}%{_prefix}/local/%{name} -type f -printf '%p\n' | grep -v 'conf/' | sed -e 's|%{buildroot}||g'
+	find %{buildroot}%{_prefix}/local/%{name}/conf -type f -printf '%%%config(noreplace) %p\n' | sed -e 's|%{buildroot}||g'
 ) > filelist
 
 %clean
 rm -rf %{buildroot}
 
 %pre
-getent group hadoop >/dev/null || groupadd -r hadoop
+getent group hadoop >/dev/null || \
+	groupadd -r hadoop
 getent passwd hadoop >/dev/null || \
-       useradd -m -r -g hadoop -c "HDFS runtime user" \
-       -s /bin/bash hadoop
+	useradd -m -r -g hadoop -c "HDFS runtime user" \
+	-s /bin/bash hadoop
 exit 0
 
 %check
