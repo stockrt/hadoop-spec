@@ -28,8 +28,8 @@ Distributed filesystem (HDFS) and task tracker
 # hadoop-env.sh defaults
 %{__sed} -i -e 's|.*JAVA_HOME=.*|export JAVA_HOME=/usr/java/latest|' \
          -e 's|.*HADOOP_CLASSPATH=.*|export HADOOP_CLASSPATH=$HADOOP_CONF_DIR:$(build-classpath hadoop)|' \
-         -e 's|.*HADOOP_LOG_DIR=.*|export HADOOP_LOG_DIR=/var/log/hadoop|' \
-         -e 's|.*HADOOP_PID_DIR=.*|export HADOOP_PID_DIR=/var/run/hadoop|' \
+         -e 's|.*HADOOP_LOG_DIR=.*|export HADOOP_LOG_DIR=%{_var}/log/hadoop|' \
+         -e 's|.*HADOOP_PID_DIR=.*|export HADOOP_PID_DIR=%{_var}/run/hadoop|' \
          conf/hadoop-env.sh
 
 %install
