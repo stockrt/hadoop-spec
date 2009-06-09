@@ -60,7 +60,7 @@ done
 getent group hadoop >/dev/null || \
 	groupadd -r hadoop
 getent passwd hadoop >/dev/null || \
-	useradd -m -r -g hadoop -c "HDFS runtime user" -s /bin/bash hadoop
+	useradd -m -r -g hadoop -c 'HDFS runtime user' -s /bin/bash hadoop
 exit 0
 
 %check
