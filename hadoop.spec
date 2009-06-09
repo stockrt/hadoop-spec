@@ -5,7 +5,7 @@ Summary:       Distributed filesystem and task tracker
 Group:         System Environment/Daemons
 URL:           http://hadoop.apache.org
 Vendor:        Apache Software Foundation
-Packager:      Rogerio Carvalho Schneider <stockrt@gmail.com>
+Packager:      Rogério Carvalho Schneider <stockrt@gmail.com>
 License:       ASL 2.0
 BuildArch:     noarch
 Source:        %{name}-%{version}.tar.gz
@@ -72,5 +72,5 @@ exit 0
 %files -f filelist
 
 %changelog
-* Mon Jun  8 2009 - Rogerio Carvalho Schneider <stockrt@gmail.com> - 0.20.0-1
+* Mon Jun  8 2009 - Rogério Carvalho Schneider <stockrt@gmail.com> - 0.20.0-1
 - Initial version for Hadoop-0.20.0 release
