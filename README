@@ -1,0 +1,15 @@
+#
+# Author: Rogério Carvalho Schneider <stockrt@gmail.com>
+# URL:    http://stockrt.github.com
+#
+
+Generating binary RPM:
+  rpmbuild -bb hadoop.spec
+
+Generating source RPM:
+  rpmbuild -bs hadoop.spec
+
+Generating binary and source RPMs:
+  rpmbuild -ba hadoop.spec
+
+Main project: http://hadoop.apache.org
