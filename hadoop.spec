@@ -35,11 +35,13 @@ Distributed filesystem (HDFS) and task tracker
 %install
 %{__rm} -rf %{buildroot}
 %{__install} -m 0755 -d %{buildroot}%{_prefix}/local/%{name}
-for D in $(find . -mindepth 1 -maxdepth 1 -type d | cut -c 3- | %{__grep} -Evw 'build|contrib|docs|src')
+for D in $(find . -mindepth 1 -maxdepth 1 -type d | cut -c 3- | %{__grep} -Evw 'build|docs|src')
 do
 	%{__cp} -a $D %{buildroot}%{_prefix}/local/%{name}/
 done
 %{__install} -m 0644 *.jar %{buildroot}%{_prefix}/local/%{name}/
+%{__install} -m 0644 *.txt %{buildroot}%{_prefix}/local/%{name}/
+%{__install} -m 0644 *.xml %{buildroot}%{_prefix}/local/%{name}/
 %{__install} -m 0755 -d %{buildroot}%{_var}/run/hadoop
 %{__install} -m 0755 -d %{buildroot}%{_var}/log/hadoop
 
