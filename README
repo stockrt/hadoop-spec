@@ -3,6 +3,11 @@
 # URL:    http://stockrt.github.com
 #
 
+Getting the original source from Apache's Hadoop:
+  mkdir -p ~/rpmbuild/SOURCES
+  cd ~/rpmbuild/SOURCES
+  wget http://linorg.usp.br/apache/hadoop/core/hadoop-0.20.0/hadoop-0.20.0.tar.gz
+
 Generating binary RPM:
   rpmbuild -bb hadoop.spec
 
