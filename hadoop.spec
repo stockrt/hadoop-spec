@@ -73,4 +73,4 @@ exit 0
 
 %changelog
 * Mon Jun  8 2009 - Rogério Carvalho Schneider <stockrt@gmail.com> - 0.20.0-1
-- Initial version for Hadoop-0.20.0 release
+- Initial packing for Hadoop-0.20.0 release
