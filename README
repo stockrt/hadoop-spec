@@ -3,7 +3,7 @@
 # URL:    http://stockrt.github.com
 #
 
-Getting the original source from Apache's Hadoop:
+Getting the original Apache Hadoop Core source:
   mkdir -p ~/rpmbuild/SOURCES
   cd ~/rpmbuild/SOURCES
   wget http://linorg.usp.br/apache/hadoop/core/hadoop-0.20.0/hadoop-0.20.0.tar.gz
@@ -17,4 +17,4 @@ Generating source RPM:
 Generating binary and source RPMs:
   rpmbuild -ba hadoop.spec
 
-Main project: http://hadoop.apache.org
+Main project: http://hadoop.apache.org/core

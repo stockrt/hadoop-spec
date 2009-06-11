@@ -1,9 +1,9 @@
 Name:          hadoop
 Version:       0.20.0
 Release:       1
-Summary:       Distributed filesystem and task tracker
+Summary:       Hadoop Distributed File System and MapReduce implementation
 Group:         System Environment/Daemons
-URL:           http://hadoop.apache.org
+URL:           http://hadoop.apache.org/core
 Vendor:        Apache Software Foundation
 Packager:      Rogério Carvalho Schneider <stockrt@gmail.com>
 License:       ASL 2.0
@@ -18,8 +18,36 @@ Requires:      jdk
 # cd ~/rpmbuild/SOURCES
 # wget http://linorg.usp.br/apache/hadoop/core/hadoop-0.20.0/hadoop-0.20.0.tar.gz
 
+# Recommended Topdir
+%define _topdir %(echo $HOME)/rpmbuild
+
+# So the build does not fail due to unpackaged files or due to missing doc
+# files:
+%define _unpackaged_files_terminate_build 0
+%define _missing_doc_files_terminate_build 0
+
+# No debug package:
+%define debug_package %{nil}
+
 %description
-Distributed filesystem (HDFS) and task tracker
+Apache Hadoop Core is a software platform that lets one easily write and run
+applications that process vast amounts of data.
+
+Here's what makes Hadoop especially useful:
+ * Scalable: Hadoop can reliably store and process petabytes.
+ * Economical: It distributes the data and processing across clusters of
+   commonly available computers. These clusters can number into the
+   thousands of nodes.
+ * Efficient: By distributing the data, Hadoop can process it in parallel on
+   the nodes where the data is located. This makes it extremely rapid.
+ * Reliable: Hadoop automatically maintains multiple copies of data and
+   automatically redeploys computing tasks based on failures.
+
+Hadoop implements MapReduce, using the Hadoop Distributed File System (HDFS).
+MapReduce divides applications into many small blocks of work. HDFS creates
+multiple replicas of data blocks for reliability, placing them on compute
+nodes around the cluster. MapReduce can then process the data where it is
+located.
 
 %prep
 %setup -q
